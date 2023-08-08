@@ -14,6 +14,10 @@
 </template>
 
 <script>
+import { auth } from '@/includes/firebase.js'
+import { mapWritableState } from 'pinia'
+import useUserStore from '@/stores/users.js'
+
 import MusicHeader from './components/MusicHeader.vue'
 import UserAuthentication from './components/UserAuthentication.vue'
 import MusicIntroduction from './components/MusicIntroduction.vue'
@@ -22,6 +26,14 @@ import MusicPlayer from './components/MusicPlayer.vue'
 
 export default {
   name: 'app',
+  computed: {
+    ...mapWritableState(useUserStore, ['userLoggedIn'])
+  },
+  created() {
+    if (auth.currentUser) {
+      this.userLoggedIn = true
+    }
+  },
 
   components: {
     MusicHeader,
