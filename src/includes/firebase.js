@@ -3,11 +3,11 @@ import 'firebase/auth'
 import 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDj5uoyqnCvddit3QIbBVS-tvtjraUH-KA',
-  authDomain: 'music-ba228.firebaseapp.com',
-  projectId: 'music-ba228',
-  storageBucket: 'music-ba228.appspot.com',
-  appId: '1:468589485749:web:48a5626ef7a1bdf9aea8fc'
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  appId: import.meta.env.VITE_APP_ID
 }
 
 firebase.initializeApp(firebaseConfig)

@@ -19,6 +19,14 @@ export default defineStore('user', {
         country: values.userCountry
       })
       this.userLoggedIn = true
+    },
+    async authenticateUser(values) {
+      await auth.signInWithEmailAndPassword(values.userEmailId, values.userPassword)
+      this.userLoggedIn = true
+    },
+    async logOutUser() {
+      await auth.signOut()
+      this.userLoggedIn = false
     }
   }
 })
