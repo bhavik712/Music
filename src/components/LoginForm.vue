@@ -6,6 +6,7 @@
   >
     {{ logInStatus }}
   </div>
+
   <vee-form @submit="authenticate">
     <!-- Email -->
     <div class="mb-3">
@@ -33,7 +34,7 @@ export default {
   data() {
     return {
       loginFields: jsonData.loginFields,
-
+      isStatusShown: false,
       isLoginFormSubmitted: false,
       showLogInStatus: false,
       logInStatusClass: 'bg-blue-600',
@@ -69,10 +70,10 @@ export default {
         console.log(error)
         return
       }
-
       this.logInStatusClass = 'bg-green-600'
       this.logInStatus = 'Log In SucessFull'
-      window.location.reload()
+
+      setTimeout(() => this.$router.push({ name: 'home' }), 750)
     }
   },
   components: {

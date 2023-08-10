@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed z-10 inset-0 overflow-y-auto" id="modal" :class="{ hidden: isHidden }">
+  <div class="fixed z-10 inset-0 overflow-y-auto" id="modal">
     <div
       class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
     >
@@ -19,9 +19,11 @@
           <div class="flex justify-between items-center pb-4">
             <p class="text-2xl font-bold">Your Account</p>
             <!-- Modal Close Button -->
-            <div class="modal-close cursor-pointer z-50" @click.prevent="isHidden = !isHidden">
-              <i class="fas fa-times"></i>
-            </div>
+            <router-link :to="{ name: 'home' }">
+              <div class="modal-close cursor-pointer z-50">
+                <i class="fas fa-times"></i>
+              </div>
+            </router-link>
           </div>
 
           <!-- Tabs -->
@@ -64,7 +66,7 @@
 
 <script>
 import { mapWritableState } from 'pinia'
-import useModelStore from '@/stores/model'
+import useUserStore from '@/stores/model'
 import LoginForm from './LoginForm.vue'
 import RegistrationForm from './RegistraionForm.vue'
 
@@ -80,7 +82,7 @@ export default {
     }
   },
   computed: {
-    ...mapWritableState(useModelStore, ['isHidden'])
+    ...mapWritableState(useUserStore, ['userLoggedIn'])
   },
   methods: {}
 }

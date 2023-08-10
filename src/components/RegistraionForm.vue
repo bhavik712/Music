@@ -65,7 +65,7 @@ export default {
   data() {
     return {
       regFields: jsonData.regFields,
-
+      regSucessed: false,
       regFormSubmission: false,
       regShowStatus: false,
       regShowStatusClass: 'bg-blue-600',
@@ -95,7 +95,6 @@ export default {
   },
   methods: {
     ...mapActions(useUserStore, ['createUser']),
-
     async register(values) {
       this.regShowStatus = true
       this.regFormSubmission = true
@@ -115,9 +114,9 @@ export default {
 
       this.regShowStatusClass = 'bg-green-600'
       this.regStatus = 'sucess your account has been created & You are Logged in'
-
       console.log(userCredentials)
-      window.location.reload()
+
+      setTimeout(() => this.$router.push({ name: 'home' }), 750)
     }
   }
 }
