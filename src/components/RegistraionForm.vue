@@ -94,7 +94,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(useUserStore, ['createUser']),
+    ...mapActions(useUserStore, ['createUser', 'getCurrentUserData']),
     async register(values) {
       this.regShowStatus = true
       this.regFormSubmission = true
@@ -115,7 +115,7 @@ export default {
       this.regShowStatusClass = 'bg-green-600'
       this.regStatus = 'sucess your account has been created & You are Logged in'
       console.log(userCredentials)
-
+      this.getCurrentUserData()
       setTimeout(() => this.$router.push({ name: 'home' }), 750)
     }
   }

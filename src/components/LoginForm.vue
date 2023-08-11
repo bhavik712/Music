@@ -52,7 +52,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(useUserStore, ['authenticateUser']),
+    ...mapActions(useUserStore, ['authenticateUser', 'getCurrentUserData']),
 
     async authenticate(values) {
       this.showLogInStatus = true
@@ -72,7 +72,7 @@ export default {
       }
       this.logInStatusClass = 'bg-green-600'
       this.logInStatus = 'Log In SucessFull'
-
+      this.getCurrentUserData()
       setTimeout(() => this.$router.push({ name: 'home' }), 750)
     }
   },

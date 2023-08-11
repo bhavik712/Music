@@ -28,6 +28,7 @@
             <li>
               <router-link class="px-2 text-white" :to="{ name: 'manage' }">Manage</router-link>
             </li>
+            <li class="px-2 text-white">{{ currentLoggedUser.name }}</li>
             <li>
               <router-link
                 class="px-2 text-white"
@@ -54,7 +55,7 @@ export default {
   name: 'MusicHeader',
   computed: {
     ...mapWritableState(useModelStore, ['isHidden']),
-    ...mapState(useUserStore, ['userLoggedIn'])
+    ...mapState(useUserStore, ['userLoggedIn', 'currentLoggedUser'])
   },
   methods: {
     showAuthentication() {
