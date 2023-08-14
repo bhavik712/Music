@@ -7,7 +7,7 @@
 
 <script>
 import { auth } from '@/includes/firebase.js'
-import { mapWritableState } from 'pinia'
+import { mapWritableState, mapActions } from 'pinia'
 import useUserStore from '@/stores/users.js'
 import MusicPlayer from './components/MusicPlayer.vue'
 import MusicHeader from './components/MusicHeader.vue'
@@ -17,9 +17,13 @@ export default {
   computed: {
     ...mapWritableState(useUserStore, ['userLoggedIn'])
   },
+  methods: {
+    ...mapActions(useUserStore, ['getCurrentUserData'])
+  },
   created() {
     if (auth.currentUser) {
       this.userLoggedIn = true
+      this.getCurrentUserData()
     }
   },
 

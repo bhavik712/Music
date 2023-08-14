@@ -19,6 +19,7 @@
       >
         <h5>Drop your files here</h5>
       </div>
+      <input type="file" multiple @change="uploadMusicfile($event)" />
       <hr class="my-6" />
       <!-- Progess Bars -->
       <div class="mb-4" v-for="uploadSong in uploadSongs" :key="uploadSong.name">
@@ -51,10 +52,13 @@ export default {
       uploadSongs: []
     }
   },
+  emits: ['addSong'],
   methods: {
     uploadMusicfile($event) {
       this.isDragging = false
-      const uploadedFiles = [...$event.dataTransfer.files]
+      const uploadedFiles = $event.dataTransfer
+        ? [...$event.dataTransfer.files]
+        : [...$event.target.files]
       for (const file of uploadedFiles) {
         if (file.type !== 'audio/mpeg') {
           console.log('file format not supported')
@@ -92,15 +96,22 @@ export default {
               originalName: task.snapshot.ref.name,
               modifiedName: task.snapshot.ref.name,
               genre: '',
-              comment_count: 0
+              totalComments: 0
             }
             song.url = await task.snapshot.ref.getDownloadURL()
-            await songCollection.add(song)
+            const songRef = await songCollection.add(song)
+            const songSnapshot = await songRef.get()
+            this.$emit('addSong', songSnapshot)
             this.uploadSongs[uploadingSongIndex].progressBarColor = 'bg-green-400'
             this.uploadSongs[uploadingSongIndex].icon = ' fas fa-check'
             this.uploadSongs[uploadingSongIndex].textColor = 'text-green-400'
           }
         )
+      }
+    },
+    beforeUnmount() {
+      for (const file of this.uploadSongs) {
+        file.task.cancel()
       }
     }
   }

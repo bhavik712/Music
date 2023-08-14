@@ -18,6 +18,11 @@ const routes = [
     component: () => import('@/components/UserAuthentication.vue')
   },
   {
+    name: 'song',
+    path: '/song/:id',
+    component: () => import('@/views/SongPage.vue')
+  },
+  {
     name: 'manage',
     // alias: '/manage',
     path: '/manage-music',
