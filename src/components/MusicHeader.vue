@@ -41,6 +41,11 @@
             </li>
           </template>
         </ul>
+        <ul class="ml-auto text-white cursor-pointer" @click="changeLanguage">
+          {{
+            anotherLocal
+          }}
+        </ul>
       </div>
     </nav>
   </header>
@@ -55,7 +60,11 @@ export default {
   name: 'MusicHeader',
   computed: {
     ...mapWritableState(useModelStore, ['isHidden']),
-    ...mapState(useUserStore, ['userLoggedIn', 'currentLoggedUser'])
+    ...mapState(useUserStore, ['userLoggedIn', 'currentLoggedUser']),
+
+    anotherLocal() {
+      return this.$i18n.locale === 'en' ? 'Gujrati' : 'English'
+    }
   },
   methods: {
     showAuthentication() {
@@ -69,6 +78,9 @@ export default {
         console.log(error)
         return
       }
+    },
+    changeLanguage() {
+      return (this.$i18n.locale = this.$i18n.locale === 'en' ? 'gu' : 'en')
     }
   }
 }
