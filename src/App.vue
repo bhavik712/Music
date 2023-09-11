@@ -1,7 +1,12 @@
 <template>
   <!-- Header -->
   <music-header> </music-header>
-  <router-view></router-view>
+  <router-view v-slot="{ Component }">
+    <transition name="fade" mode="out-in">
+      <component :is="Component"></component>
+    </transition>
+  </router-view>
+
   <music-player></music-player>
 </template>
 
@@ -33,3 +38,16 @@ export default {
   }
 }
 </script>
+<style>
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: all 0.25s linear;
+}
+
+.fade-leave-to {
+  transition: all 0.25s linear;
+  opacity: 0;
+}
+</style>

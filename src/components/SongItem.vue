@@ -12,16 +12,25 @@
     </div>
 
     <div class="text-gray-600 text-lg">
-      <span class="comments">
-        <i class="fa fa-comments text-gray-600"></i>
-        {{ song.totalComments }}
-      </span>
+      <router-link
+        custom
+        :to="{ name: 'song', params: { id: song.songID }, hash: '#comments' }"
+        v-slot="{ navigate }"
+      >
+        <span class="comments" @click="navigate">
+          <i class="fa fa-comments text-gray-600"></i>
+          {{ song.totalComments }}
+        </span>
+      </router-link>
     </div>
   </li>
 </template>
 <script>
+import { RouterLink } from 'vue-router'
+
 export default {
   name: 'SongItem',
-  props: ['song']
+  props: ['song'],
+  components: { RouterLink }
 }
 </script>

@@ -1,8 +1,10 @@
 <template>
-  <!-- Introduction -->
-  <music-introduction></music-introduction>
-  <!-- Main Content -->
-  <music-content></music-content>
+  <main>
+    <!-- Introduction -->
+    <music-introduction></music-introduction>
+    <!-- Main Content -->
+    <music-content></music-content>
+  </main>
 </template>
 <script>
 import MusicIntroduction from '@/components/MusicIntroduction.vue'
