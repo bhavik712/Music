@@ -10,10 +10,14 @@ import './assets/main.css'
 import { auth } from './includes/firebase'
 import i18n from '@/includes/i18n.js'
 import { registerSW } from 'virtual:pwa-register'
+import progressBar from './includes/progressBar'
+import 'nprogress/nprogress.css'
 let app
 registerSW({
   immediate: true
 })
+
+progressBar(router)
 auth.onAuthStateChanged(() => {
   if (!app) {
     app = createApp(App)
