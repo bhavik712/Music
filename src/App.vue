@@ -1,34 +1,53 @@
 <template>
   <!-- Header -->
   <music-header> </music-header>
+  <router-view v-slot="{ Component }">
+    <transition name="fade" mode="out-in">
+      <component :is="Component"></component>
+    </transition>
+  </router-view>
 
-  <!-- Introduction -->
-  <music-introduction></music-introduction>
-  <!-- Main Content -->
-  <music-content></music-content>
-
-  <!-- Player -->
   <music-player></music-player>
-  <!-- Auth Modal -->
-  <user-authentication> </user-authentication>
 </template>
 
 <script>
-import MusicHeader from './components/MusicHeader.vue'
-import UserAuthentication from './components/UserAuthentication.vue'
-import MusicIntroduction from './components/MusicIntroduction.vue'
-import MusicContent from './components/MusicContent.vue'
+import { auth } from '@/includes/firebase.js'
+import { mapWritableState, mapActions } from 'pinia'
+import useUserStore from '@/stores/users.js'
 import MusicPlayer from './components/MusicPlayer.vue'
+import MusicHeader from './components/MusicHeader.vue'
 
 export default {
   name: 'app',
+  computed: {
+    ...mapWritableState(useUserStore, ['userLoggedIn'])
+  },
+  methods: {
+    ...mapActions(useUserStore, ['getCurrentUserData'])
+  },
+  created() {
+    if (auth.currentUser) {
+      this.userLoggedIn = true
+      this.getCurrentUserData()
+    }
+  },
 
   components: {
     MusicHeader,
-    UserAuthentication,
-    MusicIntroduction,
-    MusicContent,
     MusicPlayer
   }
 }
 </script>
+<style>
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: all 0.25s linear;
+}
+
+.fade-leave-to {
+  transition: all 0.25s linear;
+  opacity: 0;
+}
+</style>

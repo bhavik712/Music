@@ -1,0 +1,53 @@
+{
+  "loginFields": {
+    "userEmailField": {
+      "label": "Email",
+      "name": "userEmailId",
+      "type": "email",
+      "placeholder": "Enter Email",
+      "rules": "requiredField|validateEmail"
+    },
+    "passwordField": {
+      "label": "Password",
+      "name": "userPassword",
+      "type": "password",
+      "placeholder": "Enter Password",
+      "rules": "requiredField|minFieldLength:8|maxFieldLength:12|alphaNum"
+    }
+  },
+
+  "regFields": {
+    "userRegName": {
+      "label": "Name",
+      "name": "userName",
+      "type": "text",
+      "placeholder": "Enter Name",
+      "rules": "requiredField|minFieldLength: 3|maxFieldLength: 20|alphaSpaces"
+    },
+    "userRegAge": {
+      "label": "Age",
+      "name": "userAge",
+      "type": "Number",
+      "placeholder": "Enter Age",
+      "rules": "requiredField|minFieldValue:18|maxFieldValue:130"
+    },
+    "userRegEmail": {
+      "label": "Email",
+      "name": "userEmail",
+      "type": "email",
+      "placeholder": "Enter Email",
+      "rules": "requiredField|validateEmail"
+    },
+    "userRegCountry": {
+      "label": "Country",
+      "name": "userCountry",
+      "values": ["USA", "Mexico", "Germany", "Canada"],
+      "rules": "requiredField|excluded:Canada"
+    },
+    "userRegTnC": {
+      "label": "Accept terms of service",
+      "name": "tnc",
+      "rules": "requiredField"
+    }
+  }
+}
